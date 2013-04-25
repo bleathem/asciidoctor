@@ -333,6 +333,7 @@ module Substituters
     found[:macroish] = (found[:square_bracket] && found[:colon])
     found[:macroish_short_form] = (found[:square_bracket] && found[:colon] && result.include?(':['))
     found[:uri] = (found[:colon] && result.include?('://'))
+    found[:menu_separator] = result.include?('&gt;&gt;&gt;')
     link_attrs = @document.attributes.has_key?('linkattrs')
 
     if found[:macroish] && result.include?('image:')
@@ -473,7 +474,19 @@ module Substituters
         string = m[2].empty? ? m[3] : m[2];
         keys = string.split(REGEXP[:plus_delim])
 
-        Inline.new(self, :key, 'dog', :attributes => {'keys' => keys}).render
+        Inline.new(self, :key, nil, :attributes => {'keys' => keys}).render
+      }
+    end
+
+    if found[:menu_separator]
+      result.gsub!(REGEXP[:menu_macro]) {
+        # alias match for Ruby 1.8.7 compat
+        m = $~
+        menu = m[1];
+        submenu = m[5];
+        item = m[6];
+
+        Inline.new(self, :menu, nil, :attributes => {'menu' => menu, 'submenu' => submenu, 'item' => item}).render
       }
     end
 
