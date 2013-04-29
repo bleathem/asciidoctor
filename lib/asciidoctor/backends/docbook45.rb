@@ -601,11 +601,14 @@ class InlineKeyTemplate < BaseTemplate
     end
   end
 
-  def template
-    @template ||= @eruby.new <<-EOF
-<%#encoding:UTF-8%><%= template.key(attr :keys) %>
-    EOF
+  def result(node)
+    key(node.attr('keys'))
   end
+
+  def template
+    :invoke_result
+  end
+
 end
 
 class InlineMenuTemplate < BaseTemplate
