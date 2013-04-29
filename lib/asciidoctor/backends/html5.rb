@@ -734,6 +734,46 @@ class InlineQuotedTemplate < BaseTemplate
   end
 end
 
+class InlineKeyTemplate < BaseTemplate
+  def key(keys)
+    case keys.size
+      when 1
+        %(<b>#{keys[0]}</b>)
+      when 2
+        %(<b>#{keys[0]}</b> + <b>#{keys[1]}</b>)
+      when 3
+        %(<b>#{keys[0]}</b> + <b>#{keys[1]}</b> + <b>#{keys[2]}</b>)
+    end
+  end
+
+  def result(node)
+    key(node.attr('keys'))
+  end
+
+  def template
+    :invoke_result
+  end
+
+end
+
+class InlineMenuTemplate < BaseTemplate
+  def menu(menu, submenu, item)
+    if submenu
+      %(<b>#{menu}</b> &larr; <b>#{submenu}</b> &larr; <b>#{item}</b>)
+    else
+      %(<b>#{menu}</b> &larr; <b>#{item}</b>)
+    end
+  end
+
+  def result(node)
+    menu(node.attr('menu'), node.attr('submenu'), node.attr('item'))
+  end
+
+  def template
+    :invoke_result
+  end
+end
+
 class InlineAnchorTemplate < BaseTemplate
   def anchor(target, text, type, document, window = nil)
     case type
