@@ -738,11 +738,11 @@ class InlineKeyTemplate < BaseTemplate
   def key(keys)
     case keys.size
       when 1
-        %(<b>#{keys[0]}</b>)
+        %(<button>#{keys[0]}</button>)
       when 2
-        %(<b>#{keys[0]}</b> + <b>#{keys[1]}</b>)
+        %(<button>#{keys[0]}</button> + <button>#{keys[1]}</button>)
       when 3
-        %(<b>#{keys[0]}</b> + <b>#{keys[1]}</b> + <b>#{keys[2]}</b>)
+        %(<button>#{keys[0]}</button> + <button>#{keys[1]}</button> + <button>#{keys[2]}</button>)
     end
   end
 
@@ -759,9 +759,9 @@ end
 class InlineMenuTemplate < BaseTemplate
   def menu(menu, submenu, item)
     if submenu
-      %(<b>#{menu}</b> &larr; <b>#{submenu}</b> &larr; <b>#{item}</b>)
+      %(<b>#{menu}</b> &rarr; <b>#{submenu}</b> &rarr; <b>#{item}</b>)
     else
-      %(<b>#{menu}</b> &larr; <b>#{item}</b>)
+      %(<b>#{menu}</b> &rarr; <b>#{item}</b>)
     end
   end
 
