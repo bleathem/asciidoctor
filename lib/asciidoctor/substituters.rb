@@ -482,9 +482,12 @@ module Substituters
       result.gsub!(REGEXP[:menu_macro]) {
         # alias match for Ruby 1.8.7 compat
         m = $~
-        menu = m[1];
-        submenu = m[5];
-        item = m[6];
+        #menu = m[2] || m[3]
+        #submenu = m[5]
+        #item = m[7] || m[8]
+        menu = m[2] || m[3]
+        submenu = m[6] || m[7]
+        item = m[9] || m[10]
 
         Inline.new(self, :menu, nil, :attributes => {'menu' => menu, 'submenu' => submenu, 'item' => item}).render
       }

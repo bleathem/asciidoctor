@@ -387,7 +387,7 @@ module Asciidoctor
 
     # File>>>Close or "Events and Tasks">>>New>>>Task
     # ()?su)(?<!\w)[\\]?((?P<menu>[^"\s]+?)|"(?P<menualt>\w[\w\s]*?)")\+\&gt;((?P<submenu>.+?)\+\&gt;)?((?P<item>[^"\s]+)|"(?P<itemalt>\w[\w\s]*?)")(?!\w)=menu
-    :menu_macro        => /\\?((\\?[^"\s]+?)|"(\\?\w[\w\s]*?)")&gt;&gt;&gt;((\\?.+?)&gt;&gt;&gt;)?((\\?[^"\s]+)|"(\\?\w[\w\s]*?)")(?!\w)/,
+    :menu_macro        => /\\?((\\?[^"\s]+?)|"(\\?\w[\w\s]*?)")&gt;&gt;&gt;(((\\?[^"\s]+?)|"(\\?\w[\w\s]*?)")&gt;&gt;&gt;)?((\\?[^"\s]+)|"(\\?\w[\w\s]*?)")(?!\w)/,
 
     # inline email address
     # doc.writer@asciidoc.org
